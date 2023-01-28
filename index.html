@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <img
+            src="./img/logo.png"
+            alt="logo"
+            style="
+              height: 300px;
+              width: 700px;
+              margin: 0 auto 2rem auto;
+              background: transparent;
+              border-radius: 10px;
+            "
+            class="demo-logo"
+          />
+          <p>What is it?</p>
+          <p style="margin: 0 auto 3rem auto">How does it work?</p>
+          <a href="https://github.com/VladTarnovskiy" style="font-size: 1.5rem"
+            >created by Vlad Tarnovskiy</a
+          >
+        </section>
+        <section>
+          <section>
+            <h2>What is it?</h2>
+            <img
+                src="./img/thinkingCat.gif"
+                alt="logo"
+                style="height: 450px; width: 500px"
+                class="demo-logo"
+              />
+          </section>
+          <section id="fragments">
+            <h2>What is it?</h2>
+            <ul style="font-size: 2rem;">
+              <li class="fragment">GraphQL is a query language for client and server interaction and also the execution environment for these requests.</li>
+              <li class="fragment">GraphQL was created in order to overcome the limitations of the REST architecture. It is suitable for applications that have a lot of data and they are stored in different databases.</li>
+              <li class="fragment">The GraphQL approach is based on a simple idea — instead of creating endpoints for each object, it is enough to create one "smart" endpoint that will work with complex queries and return cumulative data to clients in the volume in which clients request them.</li>
+            </ul>
+          </section>
+          <section id="fragments">
+            <h2>GraphQL:</h2>
+            <ul>
+              <li class="fragment">Created by Facebook in 2012</li>
+              <li class="fragment">GraphQL is a replacement for REST</li>
+              <li class="fragment">GraphQL uses a Query Language</li>
+              <li class="fragment">Allows the client to specify exactly what data they need</li>
+              <li class="fragment">Facilitates data aggregation from multiple sources</li>
+              <li class="fragment">Uses a type system to describe data</li>
+              <li class="fragment">All types of queries in GraphQL are sent via POST.</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Advantages over REST API</h2>
+            <ul>
+              <li>One link for all requests</li>
+              <li>One request to many entities</li>
+              <li>In the answer ONLY the requested information</li>
+              <li>The request body defines the server response</li>
+            </ul>
+            <img
+              src="./img/restQueryScheme.png"
+              alt="restQueryScheme"
+              style="height: 250px; width: 500px"
+              class="demo-logo"
+            />
+            <img
+              src="./img/graphQueryScheme.png"
+              alt="graphQueryScheme"
+              style="height: 250px; width: 450px"
+              class="demo-logo"
+            />
+          </section>
+          <section>
+            <h2>Example</h2>
+            <img
+              src="./img/likedBy.png"
+              alt="likedBy"
+              style="height: 500px; width: 500px; float: left"
+              class="demo-logo"
+            />
+            <span style="font-size: 1.5rem; text-align: start">
+              Imagine you want to display a list of posts,
+              and under each post a list of likes, including usernames and
+              avatars. Actually, it's not hard, you just change the posts API to
+              contain the likes array, which will contain the user objects.
+            </span>
+          </section>
+          <section>
+            <h2>Example</h2>
+            <img
+              src="./img/likedBy.png"
+              alt="likedBy"
+              style="height: 500px; width: 500px; float: left"
+              class="demo-logo"
+            />
+            <span style="font-size: 1.5rem; text-align: start; line-height: 1">
+              But then, when developing a mobile application, it turned out that
+              due to loading additional data the app is running slower. So you
+              now need two endpoints, one one that returns posts with likes and
+              one without them. Let's add one more factor: it turns out that
+              posts are stored in a MySQL database, while likes in Oracle! What
+              to do now?! Here the REST API has reached its limit and GraphQL
+              comes to the rescue.
+            </span>
+          </section>
+          <section style="font-size: 2rem">
+            <span style="display: flex; justify-content: space-around;">
+              <span>
+                <p>REST API</p>
+                <img
+                src="./img/baddog.jpg"
+                alt="logo"
+                style="height: 400px; width: 680px"
+                class="demo-logo"
+              />
+              </span>
+              <span>
+                <p>GRAPHQL</p>
+                <img
+                    src="./img/gooddog.jpg"
+                    alt="logo"
+                    style="height: 400px; width: 680px"
+                    class="demo-logo"
+                  />
+              </span>
+            </span>
+          </section>
+        </section>
+        <section>
+          <h2>GraphQL API is built on three main building blocks</h2>
+          <ul>
+            <li>Schema</li>
+            <li>Queries</li>
+            <li>Resolvers</li>
+          </ul>
+        </section>
+          <section>
+            <section>
+              <h2>Schema</h2>
+              <p>
+                GraphQL Schema is a description of your data types on the
+                server, the relationships between them and the logic for
+                obtaining this data
+              </p>
+              <ul>
+                <li>You have data on the server</li>
+                <li>
+                  There are methods for obtaining this data (resolve methods)
+                </li>
+                <li>
+                  For these methods, you describe the data types of the input
+                  and output values (type declaration)
+                </li>
+                <li>
+                  Take resolve methods and type descriptions, cleverly mix and
+                  get your GraphQL Schema
+                </li>
+              </ul>
+            </section>
+            <section style="font-size: 2rem">
+              <h2>Schema definition</h2>
+              <ul>
+                <li>You describe your data with a schema (TypeDefs)</li>
+                <li>Strongly Typed</li>
+                <li>
+                  Types can be a Scalar (boolean, string, ID, Float) or Object with fields
+                </li>
+              </ul>
+              <p>Schema can generate types in Typescript</p>
+              <span style="display: flex; justify-content: space-around;">
+              <span>
+                  <pre
+                    data-id="code-animation" style="width: 300px;"
+                  ><code class="hljs javascript" data-trim data-line-numbers>
+                    const typeDefs = gql`
+                    type User {
+                      id: Int
+                      fname: String
+                      age: Int
+                      likes: Int
+                      posts: [Post]
+                    }
+                    type Post {
+                      id: Int
+                      user: User
+                      body: String
+                    }
+                    type Query {
+                      users(id: Int!): User!
+                      posts(id: Int!): Post!
+                    }
+                </code>
+              </pre>
+        </span>
+        <span>
+          <pre style="width: 500px;"
+                data-id="code-animation" style="display: inline;"
+              ><code  class="hljs javascript" data-trim data-line-numbers>
+                type Mutation {
+                  incrementLike(fname: String!) : [User!]
+                }
+                type Subscription {
+                  listenLikes : [User]
+                }
+            </code>
+          </pre>
+        </span>
+        </span>
+            </section>
+            <!-- <section>
+              <h4>Description of the scheme on the server (build phase)</h4>
+              <p>
+                To start your GraphQL server, the first thing you need to do is
+                declare the GraphQLSchema schema. The scheme contains
+                descriptions of all types, fields and methods for obtaining
+                data. All types within a GraphQL schema must have unique names.
+                There should not be two different types with the same name.
+              </p>
+            </section>
+            <section>
+              <h4>
+                The GraphQL schema is the entry point, it is the root of your
+                entire API and it consists of:
+              </h4>
+              <ul>
+                <li>query - for data retrieval operations</li>
+                <li>mutation - for data modification operations</li>
+                <li>subscription - to subscribe to events</li>
+              </ul>
+            </section>
+            <section>
+              <h4>
+                In GraphQLSchema, only query is a required parameter; without
+                it, the schema simply will not start. Schema initialization
+                looks like this:
+              </h4>
+              <pre
+                data-id="code-animation"
+              ><code class="hljs javascript" data-trim data-line-numbers>
+            import { GraphQLSchema, GraphQLObjectType, graphql } from 'graphql';
+
+            const schema = new GraphQLSchema({
+              query: new GraphQLObjectType({ name: 'Query', fields: { getUserById, findManyUsers } }),
+              mutation: new GraphQLObjectType({ name: 'Mutation', fields: { createUser, removeLastUser } }),
+              subscriptions: new GraphQLObjectType({ name: 'Subscription', fields: ... }),
+              // ... and other settings
+            });
+            </code></pre>
+            </section>
+            <section>
+              <h4>GraphQL has two operation states:</h4>
+              <ul>
+                <li>
+                  stateless - all operations in query and mutation must be
+                  stateless
+                </li>
+                <li>stateful - subscription operations must have</li>
+              </ul>
+            </section> -->
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Resolvers</h2>
+          <p style="font-size: 1.5rem;">
+            Resolver is a function that returns data for a specific field. You can return only the data that is defined in the schema by the TypeDefs object. Recognizers can be asynchronous.
+          </p>
+          <p style="font-size: 1.5rem;">Example of resolvers functions:</p>
+          <pre
+            data-id="code-animation"
+          ><code class="hljs javascript" style="font-size: 1rem; line-height: 1;" data-trim data-line-numbers>
+            const resolvers = {
+              Query: {
+                // Return the user object that matches the passed id
+                users(root, args) { 
+                  return users.filter(user => user.id === args.id)[0] }, 
+                // Return the post object that matches the passed id
+                posts(root, args) { 
+                  return posts.filter(post => post.id === args.id)[0] }
+              },
+              User: {
+                // Accept the user's data and return his posts
+                posts: (user) => {
+                  return posts.filter(post => post.userId === user.id)
+                }
+              },
+              Post: {
+                // Accept the post data and return the user who published it
+                user: (post) => {
+                  return users.filter(user => user.id === post.userId)[0]
+                }
+              },
+            };
+			</code></pre>
+          </section>
+          <section>
+            <h2>Resolvers</h2>
+          <p style="font-size: 1.5rem;">This is an example of a simple schema that defines how and what data the client will receive from the GraphQL serve:</p>
+          <pre
+            data-id="code-animation"
+          ><code class="hljs javascript" style="font-size: 1rem; line-height: 1;" data-trim data-line-numbers>
+            const resolvers = {
+              Mutation: {
+                // Change the users object: increase the number of likes
+                // for a user with the selected fname
+                incrementLike(parent, args) {
+                  users.map((user) => {
+                    if(user.fname === args.fname) user.likes++
+                    return user
+                  })
+                  pubsub.publish('LIKES', {listenLikes: users});
+                  return users
+                }
+              },
+              Subscription: {
+                // Listen to LIKES and respond when updating pubsub
+                listenLikes: {
+                  subscribe: () => pubsub.asyncIterator(['LIKES'])
+                }
+              }
+            };
+			</code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Queries</h2>
+            <p>
+              GraphQL queries are entities that are a request to the server to
+              This is an analogue of GET in the REST API
+            </p>
+            <span style="display: flex; justify-content: space-around;">
+              <span>
+                <p>Request:</p>
+                  <pre
+                    data-id="code-animation" style="width: 450px;"
+                  ><code class="hljs javascript" data-trim data-line-numbers>
+                    {
+                      user {
+                        name
+                      }
+                    }
+                </code>
+              </pre>
+        </span>
+        <span>
+          <p>Response:</p>
+          <pre style="width: 500px;"
+                data-id="code-animation" style="display: inline;"
+              ><code  class="hljs javascript" data-trim data-line-numbers>
+                {
+                  "data": {
+                    "user": {
+                      "name": "highload"
+                    }
+                  }
+                }
+            </code>
+          </pre>
+        </span>
+        </span>
+          </section>
+          <section style="font-size: 2rem">
+            <h2>Arguments</h2>
+            <p>Arguments are a key—value pair bound to a field. They can be literals and variables, they can be used on any fields. Arguments must be named, they can be optional and mandatory.</p>
+            <span style="display: flex; justify-content: space-around;">
+              <span>
+                <p style="height: 83px;">Example:
+                </p>
+                  <pre
+                    data-id="code-animation" style="width: 450px;"
+                  ><code class="hljs javascript" data-trim data-line-numbers>
+                    {
+                      user(id: "2") {
+                        age
+                      }
+                    }
+                </code>
+              </pre>
+        </span>
+        <span>
+          <p>We can set a limit on the number of posts:</p>
+          <pre style="width: 500px;"
+                data-id="code-animation" style="display: inline;"
+              ><code  class="hljs javascript" data-trim data-line-numbers>
+                {
+                  user(id: "2") {
+                    name
+                    posts(limit: 10)
+                  }
+                }
+            </code>
+          </pre>
+        </span>
+        </span>
+          </section>
+          <section style="font-size: 2rem">
+            <h2>Aliases</h2>
+            <p>For convenience, you can assign aliases — aliases to fields. Aliases help to avoid conflicts when field names match.</p>
+            <span style="display: flex; justify-content: space-around;">
+              <span>
+                <p>Request:</p>
+                  <pre
+                    data-id="code-animation" style="width: 450px;"
+                  ><code class="hljs javascript" data-trim data-line-numbers>
+                    {
+                      accholder: user(id: "22") {
+                        firstname: name
+                      }
+                    }
+                </code>
+              </pre>
+        </span>
+        <span>
+          <p>Response:</p>
+          <pre style="width: 500px;"
+                data-id="code-animation" style="display: inline;"
+              ><code  class="hljs javascript" data-trim data-line-numbers>
+                {
+                  "data": {
+                    "accholder": {
+                      "firstname": "high"
+                    }
+                  }
+                }
+            </code>
+          </pre>
+        </span>
+        </span>
+          </section>
+          <section style="font-size: 2rem">
+            <h2>Fragments</h2>
+            <p>Fragments help to specify a structure with many fields. The concept is used when you need to divide complex queries into small parts. This is especially useful when you have to combine a large number of interface components with different fragments into one sample.</p>
+            <span style="display: flex; justify-content: space-around;">
+              <span>
+                <p>Request:</p>
+                  <pre
+                    data-id="code-animation" style="width: 450px;"
+                  ><code class="hljs javascript" data-trim data-line-numbers>
+                    fragment comparisonFields on tweet {
+                      userName
+                      userHandle
+                      date
+                      body
+                      repliesCount
+                      likes
+                    }
+                </code>
+              </pre>
+        </span>
+        <span>
+          <p>Response:</p>
+          <pre style="width: 500px;"
+                data-id="code-animation" style="display: inline;"
+              ><code  class="hljs javascript" data-trim data-line-numbers>
+                "data": {
+                  "sample": {
+                    userName: "highload",
+                    userHandle: "@highload",
+                    date: "2022-05-01",
+                    body: "Good",
+                    repliesCount: 11,
+                    tweetsCount: 300,
+                    likes: 568,
+                  },
+            </code>
+          </pre>
+        </span>
+        </span>
+          </section>
+          <section style="font-size: 2rem">
+            <h2>Variables</h2>
+            <p>The values inside the query can be made dynamic using variables</p>
+            <span style="display: flex; justify-content: space-around;">
+              <span>
+                <p style="height: 83px;">Request example:</p>
+                  <pre
+                    data-id="code-animation" style="width: 450px;"
+                  ><code class="hljs javascript" data-trim data-line-numbers>
+                    query GetAccHolder($id: String) {
+                      accholder: user(id: $id) {
+                        fullname: name
+                      }
+                    }
+                </code>
+              </pre>
+        </span>
+        <span>
+          <p>And mark the variable as required with !:</p>
+          <pre style="width: 500px;"
+                data-id="code-animation" style="display: inline;"
+              ><code  class="hljs javascript" data-trim data-line-numbers>
+                query GetAccHolder($id: String!) {
+                  accholder: user(id: $id) {
+                    fullname: name
+                  }
+            </code>
+          </pre>
+        </span>
+        </span>
+          </section>
+          <section style="font-size: 2rem">
+            <h2>Directives</h2>
+            <p>The concept of variables allows you to use directives that dynamically change the structure and form of queries depending on conditions. GraphQL uses two directives: @include and @skip.</p>
+            <span style="display: flex; justify-content: space-around;">
+              <span>
+                <p>Here we are saying to use the field if it is true (@include):</p>
+                  <pre
+                    data-id="code-animation" style="width: 470px;"
+                  ><code class="hljs javascript" data-trim data-line-numbers>
+                    query GetFollowers($id: String) {
+                      user(id: $id) {
+                        fullname: name,
+                        followers: @include(if: $getFollowers) {
+                          name
+                          userHandle
+                          tweets
+                        }
+                      }
+                    }
+                    {
+                      "id": "1",
+                      "$getFollowers": false
+                    }
+                </code>
+              </pre>
+        </span>
+        <span>
+          <p>Here we are saying to skip the field if it is true (@skip):</p>
+          <pre style="width: 470px;"
+                data-id="code-animation" style="display: inline;"
+              ><code  class="hljs javascript" data-trim data-line-numbers>
+                query GetFollowers($id: String) {
+                  user(id: $id) {
+                    fullname: name,
+                    followers: @skip(if: $getFollowers) {
+                      name
+                      userHandle
+                      tweets
+                    }
+                  }
+                }
+                {
+                  "id": "1",
+                  "$getFollowers": true
+                }
+            </code>
+          </pre>
+        </span>
+        </span>
+          </section>
+          <section>
+            <p>
+              A good way to try all this in practice is to use the GraphQL API
+              Explorer from GitHub. For example, let's try the following query:
+            </p>
+            <pre
+              data-id="code-animation"
+            ><code class="hljs javascript" data-trim data-line-numbers>
+              query {
+                repository(owner: "graphql", name: "graphql-js"){
+                  name
+                  description
+                }
+              }
+          </code></pre>
+          </section>
+          <section>
+            <p>Example with GraphQL API Explorer from GitHub</p>
+            <img
+              src="./img/gitQueryPractice.gif"
+              alt="logo"
+              style="height: 400px; width: 680px"
+              class="demo-logo"
+            />
+          </section>
+        </section>
+        <section>
+          <p style="margin: 0; margin-bottom: 5px; line-height: 1;">Mutations:</p>
+          <ul style="font-size: 1.5rem">
+            <li>The mutation type adds data</li>
+            <li>This is an analogue of POST and PUT in REST</li>
+            <li>Can also specify return properties</li>
+            <li>Pass in variables</li>
+          </ul>
+          <pre
+            data-id="code-animation" style="margin-top: 0;"
+          ><code class="hljs javascript" style="font-size: 1rem; line-height: 1.2;" data-trim data-line-numbers>
+            //Mutation
+            mutation CreateReviewForEpisode($ep: Episode!, $review: ReviewInput!) {
+              createReview(episode: $ep, review: $review) {
+                stars
+                commentary
+              }
+            }
+			</code></pre>
+          <pre
+            data-id="code-animation"
+          ><code class="hljs javascript" style="font-size: 1rem; line-height: 1.2;" data-trim data-line-numbers>
+            //Variables
+            {
+              "ep": "JEDI",
+              "review": {
+                "stars": 5,
+                "commentary": "This is a great movie!"
+              }
+            }
+			</code></pre>
+          <pre
+            data-id="code-animation"
+          ><code class="hljs javascript" style="font-size: 1rem; line-height: 1.2;" data-trim data-line-numbers>
+            //Response
+            {
+              "data": {
+                "createReview": {
+                  "stars": 5,
+                  "commentary": "This is a great movie!"
+                }
+              }
+            }
+			</code></pre>
+        </section>
+        <section>
+          <h4>Subscription:</h4>
+          <p>The subscription type allows you to listen to changes in the database in realtime. Subscriptions use websockets for this.</p>
+          <pre
+            data-id="code-animation"
+          ><code class="hljs javascript" style="font-size: 1rem; line-height: 1.2;" data-trim data-line-numbers>
+            subscription listenLikes {
+              listenLikes {
+                fname
+                likes
+              }
+            }
+			</code></pre>
+      <p>This request allows you to get a list of users with names and the number of likes each time the number of likes changes. Such functionality is used, for example, in the web interface to display user activity or voting results.</p>
+        </section>
+        <section>
+          <h2>Client-server interaction (shortly):</h2>
+          <ol>
+            <li>The client sends a request to the GraphQL server to read or modify data. This request is made in accordance with a scheme approved in advance.</li>
+            <li>The GraphQL server recognizes the request by special functions — resolvers — and receives data on the requested fields.</li>
+            <li>The client receives a response with the requested data structure, usually in JSON format.</li>
+          </ol>
+        </section>
+        <section>
+          <h2>As a result, when GraphQL can be useful?</h2>
+          <ol>
+            <li>Striving to minimize the number of client requests.</li>
+            <li>Refusal to denormalize data only to optimize work on the user interface.</li>
+            <li>The presence of multiple sources of information that multiple applications work with.</li>
+          </ol>
+        </section>
+        <section style="text-align: left">
+          <h1>THE END</h1>
+          <p>
+            Thank you for your attention!
+          </p>
+          <img
+              src="./img/clapping.gif"
+              alt="logo"
+              style="height: 250px; width: 500px; border-radius: 10px;"
+              class="demo-logo"
+            />
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <!-- <script src="plugin/notes/notes.js"></script> -->
+    <!-- <script src="plugin/markdown/markdown.js"></script> -->
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealHighlight],
+      });
+    </script>
+  </body>
+</html>
